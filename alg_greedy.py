@@ -1,11 +1,16 @@
 #Algorytm Zachłanny
 
 # 1. Wczytywanie danych instancji
-f = open("dane.txt", "r");
+f = open("dane.txt", "r")
 lines = f.readlines()
+zadania = []
+uszeregowanie = []
 liczba_procesorow = int(lines[0])
 liczba_zadan = int(lines[1])
-for _ in range(2, liczba_zadan)
+for i in range(2, liczba_zadan+2):
+    x = int(lines[i])
+    zadania.append(x)
+print(zadania)
 # 2. Przydzielanie zadania na wolny procesor (zajętość procesora możemy liczyć po prostu zliczając czasy zadań do niego już przydzielonych)
 # 2.1 Procesory nich będą reprezentowane przez listę
 # 2.2 Zidentyfikować (jakoś) "wolny procesor" -> [najwolniejsza opcja] za każdym razem szukać minimum po liście procesorów i do niego dodawać

@@ -1,8 +1,8 @@
 import random
 FILE_NAME = "dane.txt"
-N_PROCESOROW = 10
-N_ZADAN = 20
-MAX_CZAS_ZADANIA=6
+N_PROCESOROW = 4
+N_ZADAN = 10
+MAX_CZAS_ZADANIA=4
 f = open("dane.txt", "w")
 f.write(f"{N_PROCESOROW}\n")
 f.write(f"{N_ZADAN}\n")

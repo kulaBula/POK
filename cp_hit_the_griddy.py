@@ -12,6 +12,11 @@ def da_function(procesory):
     for i in range(1, max(procesory)+2): 
         print(i, end = " ")
     print()
+def reprezentacja_kropkowa(procesory, liczba_procesorow, c_max):
+    s = len(str(c_max)) - 2
+    modul = 10**s
+    for i in range(liczba_procesorow):
+        print(f"Procesor {i+1}: ", "."*(int(procesory[i]/modul)), procesory[i])
 
 # 1. Wczytywanie danych instancji
 #f = open("cp_numbers.txt", "r")
@@ -44,4 +49,8 @@ s = len(str(cp_cmax))-2
 modul = 10**s
 for i in range(liczba_procesorow):
     print(f"Procesor {i+1}: ", "."*(int(procesory[i]/modul)), procesory[i])
-    
+# Output z równymi przerwami
+col_widths = [15, 50]
+for i in range(liczba_procesorow):
+    formatted = f"row[0]:<{col_widths[0]}} {row[1]:<{col_widths[1]}}"
+    print(formated)

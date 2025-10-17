@@ -1,6 +1,6 @@
 #Algorytm Zachłanny
 # 1. Wczytywanie danych instancji
-FILE = "dane_testowe_2.txt"
+FILE = "JO_20.txt"
 print(FILE)
 f = open(FILE)
 lines = f.readlines()

@@ -1,7 +1,7 @@
 #Algorytm Zachłanny
 
 # 1. Wczytywanie danych instancji
-f = open("dane.txt", "r")
+f = open("klpc100.txt", "r")
 lines = f.readlines()
 zadania = []
 liczba_procesorow = int(lines[0])

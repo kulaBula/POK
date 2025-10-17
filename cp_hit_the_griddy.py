@@ -15,7 +15,7 @@ def da_function(procesory):
 
 # 1. Wczytywanie danych instancji
 #f = open("cp_numbers.txt", "r")
-f = open("dane.txt", "r")
+f = open("plik100.txt", "r")
 lines = f.readlines()
 zadania = []
 liczba_procesorow = int(lines[0])
@@ -34,7 +34,15 @@ for zadanie in zadania:
     procesory[ind_najwolniejszy_procesor] += zadanie # 2.3 Przypisać zadanie
 print("Czasy procesorów: ", procesory)
 # POMYSŁ: za pomocą odpowiedniego wyświetlania przedstawić uszeregowanie tych procesów
-da_function(procesory)
+#da_function(procesory)
 # 3. Znaleźć, na którym procesorze jest najdłuższy czas
-print("C_max = ", max(procesory))
+c_max = max(procesory)
+print("C_max = ", c_max)
+# Liczymy liczbę kropek
+cp_cmax = c_max
+s = len(str(cp_cmax))-2
+modul = 10**s
+print(modul)
+for i in range(liczba_procesorow):
+    print("."*(int(procesory[i]/modul)))
     

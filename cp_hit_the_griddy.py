@@ -42,7 +42,6 @@ print("C_max = ", c_max)
 cp_cmax = c_max
 s = len(str(cp_cmax))-2
 modul = 10**s
-print(modul)
 for i in range(liczba_procesorow):
-    print("."*(int(procesory[i]/modul)))
+    print(f"Procesor {i+1}: ", "."*(int(procesory[i]/modul)), procesory[i])
     

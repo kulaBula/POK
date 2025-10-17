@@ -23,6 +23,7 @@ def reprezentacja_kropkowa(procesory, liczba_procesorow, c_max):
 f = open("plik100.txt", "r")
 lines = f.readlines()
 zadania = []
+wypis = []
 liczba_procesorow = int(lines[0])
 liczba_zadan = int(lines[1])
 for i in range(2, liczba_zadan+2):
@@ -32,25 +33,29 @@ print("Czasy zadań: ", zadania)
 # 2. Przydzielanie zadania na wolny procesor (zajętość procesora możemy liczyć po prostu zliczając czasy zadań do niego już przydzielonych)
 # 2.1 Procesory nich będą reprezentowane przez listę
 procesory = [0] * liczba_procesorow
-# 2.2 Zidentyfikować (jakoś) "wolny procesor" -> [najwolniejsza opcja] za każdym razem szukać minimum po liście procesorów i do niego dodawać
-# Jak sprytnie zapisywać, który procesor jest najszybciej wolny, tak, żeby to robić w czasie lepszym niż o(n^2)?
+
 for zadanie in zadania:
     ind_najwolniejszy_procesor = procesory.index(min(procesory))
     procesory[ind_najwolniejszy_procesor] += zadanie # 2.3 Przypisać zadanie
-print("Czasy procesorów: ", procesory)
-# POMYSŁ: za pomocą odpowiedniego wyświetlania przedstawić uszeregowanie tych procesów
-#da_function(procesory)
-# 3. Znaleźć, na którym procesorze jest najdłuższy czas
+#print("Czasy procesorów: ", procesory)
+
+# 3. Znaleźć, na którym procesorze jest najdłuższy czas -> Cmax
 c_max = max(procesory)
 print("C_max = ", c_max)
-# Liczymy liczbę kropek
-cp_cmax = c_max
-s = len(str(cp_cmax))-2
+
+# Output z równymi przerwami
+# Potrzebna jest lista procesor + nr procesora + czas + kropki z napisem
+col = [7, 3, 70]
+cp_max = c_max
+s = len(str(cp_max))-2
 modul = 10**s
 for i in range(liczba_procesorow):
-    print(f"Procesor {i+1}: ", "."*(int(procesory[i]/modul)), procesory[i])
-# Output z równymi przerwami
-col_widths = [15, 50]
-for i in range(liczba_procesorow):
-    formatted = f"row[0]:<{col_widths[0]}} {row[1]:<{col_widths[1]}}"
-    print(formated)
+    wypis.append([])
+    kropki = "."*int(procesory[i]/modul)+ " " + str(procesory[i])
+    wypis[i].append(["Procesor", str(i+1), kropki])
+
+# Wypis przygotowanych danych
+for row in wypis:
+    row= row[0]
+    formatted = f"{row[0]:<{col[0]}} {row[1]:<{col[1]}} {row[2]:<{col[2]}}"
+    print(formatted)

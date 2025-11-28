@@ -23,10 +23,14 @@ def strategia_losowej_zamiany(zad, proc, l:int):
     # Wybieramy dwa losowe procesory, z których wybieramy po losowym zadaniu i zamieniamy je miejscami
     proc_a_idx = random.randint(0, l-1) # wybór losowego procesora a
     proc_b_idx = random.randint(0, l-1) # wybór losowego procesora b
+    while(proc_a_idx==proc_b_idx):
+        proc_b_idx = random.randint(0, l-1) 
     liczba_zadan_a = len(zad[proc_a_idx]) 
     liczba_zadan_b = len(zad[proc_b_idx]) 
     proc_a_2_idx = random.randint(0, liczba_zadan_a-1) # wybór losowego zadania na procesorze a
     proc_b_2_idx = random.randint(0, liczba_zadan_b-1) # wybór losowego zadania na procesorze b
+    while(proc_a_2_idx==proc_b_2_idx):
+        proc_b_2_idx = random.randint(0, liczba_zadan_b-1)
     # Zamiana miejscami 
     zad[proc_a_idx].append(zad[proc_b_idx][proc_b_2_idx]) # dodajemy na koniec procesora a zadanie z procesora b
     zad[proc_b_idx].append(zad[proc_a_idx][proc_a_2_idx]) # dodajemy na koniec procesora b zadanie z procesora a
@@ -117,6 +121,18 @@ def wczytywanie(plik):
         zadania.append(x)
     return zadania, liczba_procesorow
 
+def run_loop(epochs, file, iter, temp, alfa, c):
+    C_max = c
+    c_ = c
+    for _ in range(epochs):
+        zadania, liczba_procesorow = wczytywanie(file)
+        czasy_procesorow, zadania_na_procesorach, c_max = algorytm_greedy(zadania, liczba_procesorow)
+        c_ = algorytm_sa(zadania_na_procesorach, czasy_procesorow, liczba_procesorow, iter, temp, alfa, c_)
+        if (c_ < C_max):
+            print(f"Znaleziono nowe cmax {c_}")
+            C_max = c_
+    return C_max
+
 # 1. Wczytywanie danych instancji
 FILE = "plik100.txt"
 zadania, liczba_procesorow = wczytywanie(FILE)
@@ -124,10 +140,11 @@ zadania, liczba_procesorow = wczytywanie(FILE)
 czasy_procesorow, zadania_na_procesorach, c_max = algorytm_greedy(zadania, liczba_procesorow)
 print("C_max = ", c_max)
 # 3. Poprawianie rowiązania bazowego algorytmem symulowanego wyżarzania
-ITER = 200
-TEMP = 500
-ALFA = 0.95
+ITER = 600
+TEMP = 600
+ALFA = 0.85
 c_max = algorytm_sa(zadania_na_procesorach, czasy_procesorow, liczba_procesorow, ITER, TEMP, ALFA, c_max)
 print(f"Rozwiazanie znalezione po {ITER} iteracjach: {c_max}")
 # 4. Wyświetlenie uszeregowania
 #wyswietl_uszeregowanie(czasy_procesorow, liczba_procesorow, c_max)
+print(f"C_max: {run_loop(1000, FILE, ITER, TEMP, ALFA, c_max)}")

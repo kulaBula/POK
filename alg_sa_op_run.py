@@ -1,6 +1,7 @@
 import math
 import random
 import copy
+import time
 
 def insertion_sort_sync(arr, t_arr):
     n = len(arr)
@@ -146,11 +147,17 @@ def run(p, file, runs:int, log:bool):
 
 def run_all(p, runs:int, log:bool):
     files=["dane/n50m200.txt","dane/n50m1000.txt","dane/n10m200.txt","dane/m50.txt", "dane/m25.txt"]
+    start = time.perf_counter_ns()
     for f in files:
         print(f"Running file: {f}...")
-        run(p, f, runs, log)
-        print("Done.")
-
+        if(f=="dane/n50m1000.txt" or f=="dane/n10m2000.txt"):
+            run(p, f, 2, log)
+        else:
+            run(p, f, runs, log)
+        #print("Done.")
+    end = time.perf_counter_ns()
+    time_diff = end - start
+    return time_diff/1e9
 # MAIN
 FILE = "dane/n50m200.txt"
 params = {"dane/n50m200.txt": [True, 10000, 25000, 0.999999], #978 (1)
@@ -159,4 +166,5 @@ params = {"dane/n50m200.txt": [True, 10000, 25000, 0.999999], #978 (1)
         "dane/m50.txt": [False, 2000, 20000, 0.999999] ,#151 (1)
         "dane/m25.txt": [True, 50000, 30000, 0.99999999] #3458
         }
-run_all(params, 10, True)
+
+print(f"Total time: {run_all(params, 15, False)} seconds.")
